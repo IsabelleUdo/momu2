@@ -11,6 +11,7 @@ import {
   Camera,
 } from 'lucide-react';
 
+import './App.css'
 // --- Default Garment Data (Hardcoded Base64 for Self-Contained App) ---
 // Using a simple base64 encoded image (1x1 white pixel) for the API data,
 // but a placeholder URL for the preview image to keep the UI aesthetic.
@@ -43,7 +44,7 @@ const fileToBase64 = (file) => {
 
 export default function App() {
   const defaultPrompt = 
-  "Replace the person's current outfit with the military uniform garment, ensuring it is perfectly integrated into the scene. Pay meticulous attention to realistic shadows, ambient lighting, and natural fabric folds that conform to the person's body and pose. The fit should be seamless, as if the person is genuinely wearing the uniform within the original photo's environment. The final image should be a high-quality, photorealistic depiction.";
+  "Replace the person's current outfit with the military uniform garment, ensuring it is perfectly integrated into the scene. Make sure the garment is displayed correctly with the pose of the person. Pay meticulous attention to realistic shadows, ambient lighting, and natural fabric folds that conform to the person's body and pose. The fit should be seamless, as if the person is genuinely wearing the uniform within the original photo's environment. The final image should be a high-quality, photorealistic depiction.";
 
   const [personImage, setPersonImage] = useState(null);
   const [garmentImage, setGarmentImage] = useState(DEFAULT_GARMENT_DATA); // Pre-loaded garment
@@ -251,10 +252,8 @@ export default function App() {
               onClick={() => fileInputRefPerson.current.click()}
             >
               <Icon size={40} className="text-slate-400 mb-3" />
-              <p className="font-bold text-slate-700 text-lg">Upload Photo</p>
-              <p className="text-sm text-slate-500 mt-1 flex items-center gap-1">
-                <ImageIcon size={14} /> Tap to select an image from your device
-              </p>
+            
+              
             </div>
           )}
         </div>
@@ -264,23 +263,18 @@ export default function App() {
     // Logic for Fixed Garment Display
     return (
       <div className="relative p-4 rounded-xl shadow-xl border border-blue-200 bg-white">
-        <div className="relative">
+        <div className="hide">
           <img
             src={imageState.previewUrl}
             alt={label}
             className="w-full h-80 object-cover rounded-lg shadow-md"
           />
-          <div className="absolute top-2 right-2 bg-blue-500 text-white text-xs px-3 py-1 rounded-full font-semibold shadow-md">
-            FIXED GARMENT
-          </div>
+          
           <div className="absolute bottom-1 left-1 bg-black/60 text-white text-xs px-2 py-0.5 rounded backdrop-blur-sm font-medium flex items-center gap-1">
             {imageState.label}
           </div>
         </div>
-        <div className="mt-3 p-2 bg-blue-50 text-blue-700 rounded-lg text-sm">
-          <p className="font-semibold">Current Prompt (Hidden):</p>
-          <p className="text-xs italic mt-1">{defaultPrompt}</p>
-        </div>
+       
       </div>
     );
   };
@@ -294,23 +288,18 @@ export default function App() {
 
       {/* Header */}
       <header className="max-w-4xl mx-auto mb-8 text-center">
-        <div className="inline-block px-3 py-1 bg-yellow-400 rounded-full font-bold text-lg -rotate-1 shadow-md">
-          👕
-        </div>
+       
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-800 mt-2">
-          Instant Virtual Try-On
+         MILITARY MODE: ON
         </h1>
-        <p className="text-slate-600 max-w-2xl mx-auto mt-2 text-sm sm:text-base">
-          **Mobile Edition.** Upload your photo to automatically project the
-          default garment using **Gemini 2.5 Flash Image**.
-        </p>
+       
       </header>
 
       <main className="max-w-4xl mx-auto space-y-8">
         {/* Step 1: Image Inputs (Side by Side) */}
         <section className="p-4 sm:p-6 rounded-2xl shadow-2xl border border-slate-200 bg-white/90 backdrop-blur-sm">
           <h2 className="text-xl font-bold mb-6 text-slate-700">
-            1. Input Images
+            Take a photo!
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
